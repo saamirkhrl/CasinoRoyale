@@ -1,0 +1,73 @@
+{% extends 'base.html' %} {% block title %} Dice Roll - CasinoRoyale {% endblock
+%} {% block content %}
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="card p-5 shadow-lg">
+        <!-- User Balance Display -->
+        <div class="d-flex justify-content-between mb-4">
+          <h4 class="text-muted">Your Balance: ${{ user.balance }}</h4>
+          <h4 class="text-muted">Dice Roll Game</h4>
+        </div>
+
+        <!-- Dice Roll Instructions -->
+        <div class="text-center mb-4">
+          <h2 class="mb-3">Roll the Dice!</h2>
+          <p class="lead">
+            Place your bet, choose a number, and roll the dice. Win if your
+            number is rolled!
+          </p>
+        </div>
+
+        <!-- Dice Animation Display -->
+        <div class="text-center mb-4">
+          <h1 id="rolled-number" style="font-size: 6rem">🎲</h1>
+          <h4 id="result-message" class="mt-2 text-info">
+            Place a bet and roll the dice to try your luck.
+          </h4>
+        </div>
+
+        <!-- Dice Roll Form -->
+        <form method="POST" action="{{ url_for('dice') }}">
+          <div class="row mb-4">
+            <!-- Bet Input -->
+            <div class="col-md-6">
+              <label for="bet" class="form-label">Enter Your Bet Amount</label>
+              <input
+                type="integer"
+                class="form-control"
+                id="bet"
+                name="bet"
+                placeholder="Enter your bet"
+                required
+              />
+            </div>
+
+            <!-- Number Choice -->
+            <div class="col-md-6">
+              <label for="number-choice" class="form-label"
+                >Choose the dice face you think it'll land on!</label
+              >
+              <select id="number-choice" name="dice_number" class="form-select">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Roll Dice Button -->
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-danger btn-lg">
+              Roll the Dice!
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

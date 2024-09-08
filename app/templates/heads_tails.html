@@ -1,0 +1,56 @@
+{% extends 'base.html' %} {% block title %}Heads or Tails - CasinoRoyale{%
+endblock %} {% block content %}
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card p-4 shadow">
+        <div class="text-center mb-4">
+          <h4>Balance: ${{ user.balance }}</h4>
+        </div>
+
+        <h2 class="text-center mb-4">Heads or Tails</h2>
+
+        <div class="text-center mb-4">
+          <h1 id="yougot"></h1>
+          <h1 id="result"></h1>
+          <div id="coin-flip" style="font-size: 5rem">🪙</div>
+          <h4 id="result" class="mt-2">
+            Place a bet and click "Start" to see if you win or lose.
+          </h4>
+        </div>
+
+        <form method="POST" action="{{ url_for('headstailsgame') }}">
+          <div class="row mb-4">
+            <div class="col-6">
+              <label for="bet" class="form-label">Place Your Bet</label>
+              <input
+                type="integer"
+                class="form-control"
+                id="bet"
+                name="bet"
+                placeholder="Enter your bet"
+                required
+              />
+            </div>
+            <div class="col-6">
+              <label for="choice" class="form-label"
+                >Choose Heads or Tails</label
+              >
+              <select id="choice" name="coin_face" class="form-select">
+                <option value="heads">Heads</option>
+                <option value="tails">Tails</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary btn-lg">
+              Flip the coin!
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,131 @@
+{% extends 'base.html' %} {% block title %} Home - CasinoRoyale {% endblock %}
+{% block content %}
+<div class="container mt-4">
+  <!-- User Info Section -->
+  <div class="row">
+    <div class="col-md-8">
+      <h1>Welcome, {{ user.username }}</h1>
+    </div>
+    <div class="col-md-4 text-end">
+      <h2 class="text-success">Balance: ${{ user.balance }}</h2>
+    </div>
+  </div>
+
+  <!-- About Section -->
+  <div class="d-flex align-items-center mt-4">
+    <h4 class="mb-0">{{ user.about }}</h4>
+    <button
+      class="btn btn-secondary ms-3 btn-sm"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#aboutForm"
+      aria-expanded="false"
+      aria-controls="aboutForm"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        x="0px"
+        y="0px"
+        width="24"
+        height="24"
+        viewBox="0 0 50 50"
+      >
+        <path
+          d="M 43.125 2 C 41.878906 2 40.636719 2.488281 39.6875 3.4375 L 38.875 4.25 L 45.75 11.125 C 45.746094 11.128906 46.5625 10.3125 46.5625 10.3125 C 48.464844 8.410156 48.460938 5.335938 46.5625 3.4375 C 45.609375 2.488281 44.371094 2 43.125 2 Z M 37.34375 6.03125 C 37.117188 6.0625 36.90625 6.175781 36.75 6.34375 L 4.3125 38.8125 C 4.183594 38.929688 4.085938 39.082031 4.03125 39.25 L 2.03125 46.75 C 1.941406 47.09375 2.042969 47.457031 2.292969 47.707031 C 2.542969 47.957031 2.90625 48.058594 3.25 47.96875 L 10.75 45.96875 C 10.917969 45.914063 11.070313 45.816406 11.1875 45.6875 L 43.65625 13.25 C 44.054688 12.863281 44.058594 12.226563 43.671875 11.828125 C 43.285156 11.429688 42.648438 11.425781 42.25 11.8125 L 9.96875 44.09375 L 5.90625 40.03125 L 38.1875 7.75 C 38.488281 7.460938 38.578125 7.011719 38.410156 6.628906 C 38.242188 6.246094 37.855469 6.007813 37.4375 6.03125 C 37.40625 6.03125 37.375 6.03125 37.34375 6.03125 Z"
+        ></path>
+      </svg>
+    </button>
+  </div>
+
+  <div class="collapse mt-2" id="aboutForm">
+    <form method="POST" action="{{ url_for('home') }}">
+      <div class="mb-3">
+        <textarea
+          class="form-control"
+          id="aboutText"
+          name="about"
+          rows="3"
+          placeholder="{{current_user.about}}"
+        >
+{{ user.about }}</textarea
+        >
+      </div>
+      <button type="submit" class="btn btn-success">Update</button>
+    </form>
+  </div>
+
+  <!-- Main Content Row -->
+  <div class="row mt-4">
+    <!-- Games Section -->
+    <div class="col-md-8">
+      <h3>Games</h3>
+      <div class="d-flex flex-wrap mt-3">
+        <div class="card me-3 mb-3" style="width: 18rem">
+          <div class="card-body">
+            <h5 class="card-title">
+              <p class="text-decoration-bold text-success">Heads or Tails</p>
+            </h5>
+            <p class="card-text">
+              Flip a coin and if it lands on the face you chose, you win!
+            </p>
+            <a
+              href="{{ url_for('headstailsgame') }}"
+              class="text-decoration-none"
+            >
+              <button class="btn btn-success btn-sm">
+                Play Heads or Tails
+              </button>
+            </a>
+            <footer>Chance of winning: 50%</footer>
+          </div>
+        </div>
+
+        <div class="card mb-3" style="width: 18rem">
+          <div class="card-body">
+            <h5 class="card-title">
+              <p class="text-decoration-bold text-success">Dice</p>
+            </h5>
+            <p class="card-text">
+              Roll a dice and if it lands on the number you chose, you win!
+            </p>
+            <a href="{{ url_for('dice') }}" class="text-decoration-none">
+              <button class="btn btn-success btn-sm">Play Dice</button>
+            </a>
+            <footer>Chance of winning: 16.6%</footer>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Activity Section -->
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Global Recent Activity</h5>
+          <ul class="list-group list-group-flush scrollable-list">
+            {% for activity in recent_activites %}
+            <li class="list-group-item">
+              {{ activity.username }} {{ activity.desc }} {% if
+              activity.resultgame == False %}
+              <span style="color: red">-{{ activity.amount }}</span> {% else %}
+              <span style="color: green">+{{ activity.amount }}</span> {% endif
+              %}
+              <small class="text-muted">{{ activity.date }}</small>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Additional CSS -->
+<style>
+  .scrollable-list {
+    max-height: 200px; /* Adjust height as needed */
+    overflow-y: auto;
+  }
+</style>
+
+{% endblock %}

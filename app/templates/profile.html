@@ -1,0 +1,36 @@
+{% extends 'base.html' %} {% block title %} {{ user.username }}'s Profile {%
+endblock %} {% block content %}
+<div class="container mt-4">
+  <!-- Profile Header -->
+  <div class="row mb-4">
+    <div class="col text-center">
+      <h1 class="display-4">{{ user.username }}</h1>
+      <p class="lead">Balance: ${{ user.balance }}</p>
+    </div>
+  </div>
+
+  <!-- About Section -->
+  <div class="row mb-4">
+    <div class="col-md-8 mx-auto">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">About</h5>
+          <p class="card-text">{{ user.about }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Account Created Section -->
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Account Created</h5>
+          <p class="card-text">{{ user.account_created}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

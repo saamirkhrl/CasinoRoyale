@@ -1,0 +1,69 @@
+{% extends 'base.html' %} {% block title %} Transfer Funds - CasinoRoyale {%
+endblock %} {% block content %}
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card p-4 shadow">
+        <!-- Page Title -->
+        <div class="text-center mb-4">
+          <h2>Transfer Funds</h2>
+          <h5>Your balance: {{user.balance}}</h5>
+        </div>
+
+        <!-- Transfer Form -->
+        <form method="POST" action="{{ url_for('transfer') }}">
+          <!-- Transfer Amount -->
+          <div class="mb-3">
+            <label for="transfer-amount" class="form-label"
+              >Transfer Amount</label
+            >
+            <input
+              type="integer"
+              class="form-control"
+              id="transfer-amount"
+              name="amount"
+              placeholder="Enter amount to transfer"
+              required
+            />
+          </div>
+
+          <!-- Recipient Username -->
+          <div class="mb-3">
+            <label for="recipient-username" class="form-label"
+              >Recipient Username</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="recipient-username"
+              name="recipient"
+              placeholder="Enter recipient's username"
+              required
+            />
+          </div>
+
+          <!-- Your Password -->
+          <div class="mb-3">
+            <label for="password" class="form-label">Your Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+              required
+            />
+          </div>
+
+          <!-- Transfer Button -->
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary btn-lg">
+              Transfer
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
