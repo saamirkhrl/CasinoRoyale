@@ -100,7 +100,7 @@ def login():
         if not user:
             flash('Username does not exist. Try again?','danger')
         elif not check_password_hash(user.password, password):
-            flash('Wrong username, try again.','danger')
+            flash('Wrong password, try again.','danger')
         else:
             login_user(user)
             flash('Logged in succesfully!','success')
@@ -253,4 +253,4 @@ with app.app_context():
     db.create_all()
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=5000)
